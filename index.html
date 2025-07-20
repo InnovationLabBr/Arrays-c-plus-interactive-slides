@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Arrays - Interactive Learning</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .presentation-container {
+            width: 95%;
+            max-width: 1100px;
+            height: 90vh;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px 15px 0 0;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .slide-container {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .slide-container.active {
+            display: block;
+        }
+
+        .slide h2 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        .slide h3 {
+            color: #34495e;
+            margin: 25px 0 15px 0;
+            font-size: 1.4rem;
+        }
+
+        .slide p, .slide li {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .slide ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .code-example {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .visual-array {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            gap: 10px;
+        }
+
+        .array-cell {
+            width: 60px;
+            height: 60px;
+            border: 2px solid #007bff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            background: #e3f2fd;
+            border-radius: 8px;
+        }
+
+        .array-index {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        .navigation {
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 0 0 15px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: #0056b3;
+        }
+
+        .nav-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+
+        .slide-counter {
+            font-weight: bold;
+            color: #495057;
+        }
+
+        /* Playground Styles */
+        .playground {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .playground h4 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .input-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #495057;
+        }
+
+        .input-group input, .input-group select {
+            padding: 10px;
+            border: 2px solid #dee2e6;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .playground-result {
+            background: white;
+            border: 2px solid #28a745;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .array-visualization {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .array-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .playground-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 5px;
+        }
+
+        .playground-btn:hover {
+            background: #218838;
+        }
+
+        .stats {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .slide-container {
+                padding: 20px;
+            }
+            
+            .slide h2 {
+                font-size: 1.6rem;
+            }
+            
+            .array-cell {
+                width: 45px;
+                height: 45px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="header">
+            <h1>🎯 C++ Arrays Mastery</h1>
+            <p>From Zero to Hero in 45 Minutes</p>
+        </div>
+
+        <!-- Slide 1: Introduction -->
+        <div class="slide-container active">
+            <div class="slide">
+                <h2>🚀 What Are Arrays?</h2>
+                
+                <div class="highlight">
+                    <strong>Array = A container that holds multiple values of the same type</strong>
+                </div>
+                
+                <h3>🤔 Imagine This Scenario:</h3>
+                <p>You're a teacher with 30 students. You need to store their test scores...</p>
+                
+                <div class="code-example">
+// Without arrays (BAD way):
+int student1_score = 85;
+int student2_score = 92;
+int student3_score = 78;
+// ... 27 more variables! 😱
+
+// With arrays (GOOD way):
+int scores[30] = {85, 92, 78, ...}; // Much better! 🎉
+                </div>
+                
+                <h3>🏠 Real Life Example:</h3>
+                <p>Think of an array like an apartment building:</p>
+                <ul>
+                    <li>🏢 The building = Array name</li>
+                    <li>🚪 Each apartment = Array element</li>
+                    <li>🔢 Apartment number = Index (starts from 0)</li>
+                    <li>👥 Residents = Data values</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 2: Why Arrays? -->
+        <div class="slide-container">
+            <div class="slide">
+                <h2>💡 Why Do We Need Arrays?</h2>
+                
+                <h3>🎯 Problems Arrays Solve:</h3>
+                <ul>
+                    <li><strong>Organization:</strong> Keep related data together</li>
+                    <li><strong>Efficiency:</strong> Process lots of data easily</li>
+                    <li><strong>Simplicity:</strong> One name for multiple values</li>
+                    <li><strong>Loops:</strong> Perfect for repetitive operations</li>
+                </ul>
+                
+                <h3>📊 Without Arrays vs With Arrays:</h3>
+                <div class="code-example">
+// Finding average of 5 test scores
+
+// WITHOUT ARRAYS (messy):
+int score1=85, score2=92, score3=78, score4=95, score5=88;
+int average = (score1 + score2 + score3 + score4 + score5) / 5;
+
+// WITH ARRAYS (clean):
+int scores[5] = {85, 92, 78, 95, 88};
+int sum = 0;
+for(int i = 0; i < 5; i++) {
+    sum += scores[i];
+}
+int average = sum / 5;
+                </div>
+                
+                <div class="highlight">
+                    <strong>💰 Bottom Line:</strong> Arrays make your code shorter, cleaner, and more powerful!
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Array Basics -->
+        <div class="slide-container">
+            <div class="slide">
+                <h2>📚 Array Basics</h2>
+                
+                <h3>🏗️ Creating an Array:</h3>
+                <div class="code-example">
+// Syntax: dataType arrayName[size] = {values};
+int numbers[5] = {10, 20, 30, 40, 50};
+                </div>
+                
+                <h3>👁️ Visual Representation:</h3>
+                <div class="visual-array">
+                    <div class="array-item">
+                        <div class="array-cell">10</div>
+                        <div class="array-index">index 0</div>
+                    </div>
+                    <div class="array-item">
+                        <div class="array-cell">20</div>
+                        <div class="array-index">index 1</div>
+                    </div>
+                    <div class="array-item">
+                        <div class="array-cell">30</div>
+                        <div class="array-index">index 2</div>
+                    </div>
+                    <div class="array-item">
+                        <div class="array-cell">40</div>
+                        <div class="array-index">index 3</div>
+                    </div>
+                    <div class="array-item">
+                        <div class="array-cell">50</div>
+                        <div class="array-index">index 4</div>
+                    </div>
+                </div>
+                
+                <h3>🔑 Key Points:</h3>
+                <ul>
+                    <li><strong>Index starts at 0:</strong> First element is numbers[0]</li>
+                    <li><strong>Last index is size-1:</strong> For 5 elements, last is numbers[4]</li>
+                    <li><strong>Same data type:</strong> All elements must be the same type</li>
+                </ul>
+                
+                <div class="code-example">
+// Accessing elements:
+cout << numbers[0];  // Prints: 10
+cout << numbers[4];  // Prints: 50
+
+// Modifying elements:
+numbers[2] = 99;     // Changes 30 to 99
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Array Operations -->
+        <div class="slide-container">
+            <div class="slide">
+                <h2>⚡ Common Array Operations</h2>
+                
+                <h3>🔄 1. Looping Through Arrays:</h3>
+                <div class="code-example">
+int grades[5] = {85, 92, 78, 96, 88};
+
+// Print all grades
+for(int i = 0; i < 5; i++) {
+    cout << "Student " << (i+1) << ": " << grades[i] << endl;
+}
+                </div>
+                
+                <h3>🔍 2. Finding Maximum Value:</h3>
+                <div class="code-example">
+int max = grades[0];  // Start with first element
+for(int i = 1; i < 5; i++) {
+    if(grades[i] > max) {
+        max = grades[i];
+    }
+}
+cout << "Highest grade: " << max;
+                </div>
+                
+                <h3>📊 3. Calculating Average:</h3>
+                <div class="code-example">
+int sum = 0;
+for(int i = 0; i < 5; i++) {
+    sum += grades[i];
+}
+double average = (double)sum / 5;
+cout << "Average grade: " << average;
+                </div>
+                
+                <h3>🎯 4. Searching for a Value:</h3>
+                <div class="code-example">
+int searchFor = 92;
+bool found = false;
+for(int i = 0; i < 5; i++) {
+    if(grades[i] == searchFor) {
+        found = true;
+        cout << "Found " << searchFor << " at position " << i;
+        break;
+    }
+}
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Real World Examples -->
+        <div class="slide-container">
+            <div class="slide">
+                <h2>🌍 Real World Applications</h2>
+                
+                <h3>🎮 1. Game Development:</h3>
+                <ul>
+                    <li>Player inventory items</li>
+                    <li>High scores leaderboard</li>
+                    <li>Game level data</li>
+                </ul>
+                
+                <h3>🏪 2. Business Applications:</h3>
+                <ul>
+                    <li>Sales data for each month</li>
+                    <li>Employee salary information</li>
+                    <li>Product inventory tracking</li>
+                </ul>
+                
+                <h3>🔬 3. Scientific Computing:</h3>
+                <ul>
+                    <li>Temperature readings over time</li>
+                    <li>Experimental data collection</li>
+                    <li>Mathematical calculations</li>
+                </ul>
+                
+                <h3>📱 4. Mobile Apps:</h3>
+                <ul>
+                    <li>Contact lists</li>
+                    <li>Photo galleries</li>
+                    <li>Chat message history</li>
+                </ul>
+                
+                <div class="code-example">
+// Example: Weekly temperature tracking
+string days[7] = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
+int temps[7] = {72, 75, 68, 70, 73, 76, 74};
+
+cout << "This week's weather:" << endl;
+for(int i = 0; i < 7; i++) {
+    cout << days[i] << ": " << temps[i] << "°F" << endl;
+}
+                </div>
+                
+                <div class="highlight">
+                    <strong>🎯 Key Insight:</strong> Arrays are everywhere in programming! Master them and you'll solve problems more efficiently.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Common Mistakes -->
+        <div class="slide-container">
+            <div class="slide">
+                <h2>⚠️ Common Mistakes to Avoid</h2>
+                
+                <h3>🚫 1. Index Out of Bounds:</h3>
+                <div class="code-example">
+int arr[5] = {1, 2, 3, 4, 5};
+
+// WRONG - array only has indices 0-4
+cout << arr[5];  // ❌ Dangerous! Undefined behavior
+
+// CORRECT
+cout << arr[4];  // ✅ Last valid index
+                </div>
+                
+                <h3>🚫 2. Forgetting Array Starts at 0:</h3>
+                <div class="code-example">
+int scores[3] = {85, 92, 78};
+
+// WRONG - thinking first element is at index 1
+cout << "First score: " << scores[1];  // ❌ This is actually second!
+
+// CORRECT
+cout << "First score: " << scores[0];  // ✅ Index 0 is first
+                </div>
+                
+                <h3>🚫 3. Wrong Loop Conditions:</h3>
+                <div class="code-example">
+int data[5] = {10, 20, 30, 40, 50};
+
+// WRONG - goes beyond array size
+for(int i = 0; i <= 5; i++) {  // ❌ i=5 is out of bounds!
+    cout << data[i];
+}
+
+// CORRECT
+for(int i = 0; i < 5; i++) {   // ✅ Stops at i=4
+    cout << data[i];
+}
+                </div>
+                
+                <h3>💡 Pro Tips:</h3>
+                <ul>
+                    <li>Always use <strong>i < size</strong> in loops, not <strong>i <= size</strong></li>
+                    <li>Remember: for array of size N, valid indices are 0 to N-1</li>
+                    <li>Use meaningful variable names: <code>scores[i]</code> not <code>arr[i]</code></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 7: Interactive Playground -->
+        <div class="slide-container">
+            <div class="slide">
+                <h2>🎮 Interactive Array Playground</h2>
+                <p>Now it's your turn! Experiment with arrays and see how they work in real-time.</p>
+                
+                <div class="playground">
+                    <h4>🔧 Array Builder & Analyzer</h4>
+                    
+                    <div class="input-section">
+                        <div class="input-group">
+                            <label>Array Type:</label>
+                            <select id="arrayType" onchange="updatePlayground()">
+                                <option value="numbers">Numbers</option>
+                                <option value="grades">Student Grades</option>
+                                <option value="temperatures">Temperatures</option>
+                                <option value="custom">Custom Values</option>
+                            </select>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label>Array Size:</label>
+                            <input type="number" id="arraySize" value="5" min="1" max="10" onchange="updatePlayground()">
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Enter Values (comma-separated):</label>
+                        <input type="text" id="arrayValues" placeholder="10, 20, 30, 40, 50" onchange="updatePlayground()">
+                    </div>
+                    
+                    <div style="text-align: center; margin: 20px 0;">
+                        <button class="playground-btn" onclick="generateRandomArray()">🎲 Generate Random</button>
+                        <button class="playground-btn" onclick="sortArray()">📊 Sort Array</button>
+                        <button class="playground-btn" onclick="reverseArray()">🔄 Reverse</button>
+                    </div>
+                    
+                    <div class="playground-result">
+                        <h4>📊 Your Array:</h4>
+                        <div id="arrayVisualization" class="array-visualization">
+                            <!-- Array visualization will appear here -->
+                        </div>
+                        
+                        <div class="stats">
+                            <div id="arrayStats">
+                                <!-- Stats will appear here -->
+                            </div>
+                        </div>
+                        
+                        <h4>🔍 Operations:</h4>
+                        <div style="margin-top: 15px;">
+                            <label>Search for value: </label>
+                            <input type="number" id="searchValue" placeholder="Enter number">
+                            <button class="playground-btn" onclick="searchArray()">🔍 Search</button>
+                            <div id="searchResult" style="margin-top: 10px; font-weight: bold;"></div>
+                        </div>
+                        
+                        <h4>📝 C++ Code:</h4>
+                        <div id="generatedCode" class="code-example" style="margin-top: 15px;">
+                            <!-- Generated code will appear here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Summary -->
+        <div class="slide-container">
+            <div class="slide">
+                <h2>🎯 Summary & Next Steps</h2>
+                
+                <h3>✅ What You've Learned:</h3>
+                <ul>
+                    <li>🏗️ <strong>What arrays are:</strong> Containers for multiple values of the same type</li>
+                    <li>🎯 <strong>Why they're important:</strong> Organize data, work with loops, solve real problems</li>
+                    <li>📝 <strong>How to use them:</strong> Declaration, initialization, accessing elements</li>
+                    <li>⚡ <strong>Common operations:</strong> Loops, searching, finding max/min, calculating averages</li>
+                    <li>⚠️ <strong>Common mistakes:</strong> Index bounds, starting from 0, loop conditions</li>
+                </ul>
+                
+                <h3>🚀 Your Next Steps:</h3>
+                <div class="highlight">
+                    <ol>
+                        <li><strong>Practice:</strong> Write small programs using arrays</li>
+                        <li><strong>Experiment:</strong> Try different data types (int, double, char)</li>
+                        <li><strong>Build projects:</strong> Grade calculator, temperature tracker, simple games</li>
+                        <li><strong>Learn more:</strong> 2D arrays, dynamic arrays, vectors</li>
+                    </ol>
+                </div>
+                
+                <h3>💡 Practice Ideas:</h3>
+                <ul>
+                    <li>📊 Create a program to track daily expenses</li>
+                    <li>🎮 Build a simple number guessing game with high scores</li>
+                    <li>📚 Make a grade book for multiple students</li>
+                    <li>🌡️ Analyze weather data for a week</li>
+                </ul>
+                
+                <div class="code-example">
+// Challenge: Try this at home!
+// Create an array of 10 random numbers
+// Find the largest, smallest, and average
+// Count how many are above average
+
+int numbers[10];
+// Your code here!
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <h3>🎉 Congratulations!</h3>
+                    <p style="font-size: 1.2rem; color: #28a745;">You now understand C++ arrays! Keep practicing and you'll become a programming pro! 💪</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
+            <span class="slide-counter">
+                <span id="currentSlide">1</span> / <span id="totalSlides">8</span>
+            </span>
+            <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next →</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide-container');
+        const totalSlides = slides.length;
+        let currentArray = [10, 20, 30, 40, 50];
+
+        // Initialize
+        document.getElementById('totalSlides').textContent = totalSlides;
+        updateNavigation();
+        updatePlayground();
+
+        function changeSlide(direction) {
+            slides[currentSlideIndex].classList.remove('active');
+            currentSlideIndex += direction;
+            
+            if (currentSlideIndex >= totalSlides) {
+                currentSlideIndex = totalSlides - 1;
+            }
+            if (currentSlideIndex < 0) {
+                currentSlideIndex = 0;
+            }
+            
+            slides[currentSlideIndex].classList.add('active');
+            document.getElementById('currentSlide').textContent = currentSlideIndex + 1;
+            updateNavigation();
+        }
+
+        function updateNavigation() {
+            document.getElementById('prevBtn').disabled = currentSlideIndex === 0;
+            document.getElementById('nextBtn').disabled = currentSlideIndex === totalSlides - 1;
+        }
+
+        // Playground functions
+        function updatePlayground() {
+            const arrayType = document.getElementById('arrayType').value;
+            const arraySize = parseInt(document.getElementById('arraySize').value);
+            const valuesInput = document.getElementById('arrayValues');
+            
+            // Set default values based on type
+            let defaultValues;
+            switch(arrayType) {
+                case 'grades':
+                    defaultValues = generateGrades(arraySize);
+                    break;
+                case 'temperatures':
+                    defaultValues = generateTemperatures(arraySize);
+                    break;
+                case 'numbers':
+                    defaultValues = generateSequence(arraySize);
+                    break;
+                default:
+                    defaultValues = generateSequence(arraySize);
+            }
+            
+            if (!valuesInput.value || arrayType !== 'custom') {
+                valuesInput.value = defaultValues.join(', ');
+            }
+            
+            parseAndDisplayArray();
+        }
+
+        function generateGrades(size) {
+            const grades = [];
+            for (let i = 0; i < size; i++) {
+                grades.push(Math.floor(Math.random() * 31) + 70); // 70-100
+            }
+            return grades;
+        }
+
+        function generateTemperatures(size) {
+            const temps = [];
+            for (let i = 0; i < size; i++) {
+                temps.push(Math.floor(Math.random() * 30) + 60); // 60-90
+            }
+            return temps;
+        }
+
+        function generateSequence(size) {
+            const sequence = [];
+            for (let i = 0; i < size; i++) {
+                sequence.push((i + 1) * 10);
+            }
+            return sequence;
+        }
+
+        function parseAndDisplayArray() {
+            const valuesStr = document.getElementById('arrayValues').value;
+            try {
+                currentArray = valuesStr.split(',').map(val => parseInt(val.trim())).filter(val => !isNaN(val));
+                visualizeArray();
+                updateStats();
+                generateCode();
+            } catch (error) {
+                console.error('Error parsing array:', error);
+            }
+        }
+
+        function visualizeArray() {
+            const container = document.getElementById('arrayVisualization');
+            container.innerHTML = '';
+            
+            currentArray.forEach((value, index) => {
+                const arrayItem = document.createElement('div');
+                arrayItem.className = 'array-item';
+                arrayItem.innerHTML = `
+                    <div class="array-cell">${value}</div>
+                    <div class="array-index">index ${index}</div>
+                `;
+                container.appendChild(arrayItem);
+            });
+        }
+
+        function updateStats() {
+            if (currentArray.length === 0) return;
+            
+            const sum = currentArray.reduce((a, b) => a + b, 0);
+            const average = (sum / currentArray.length).toFixed(2);
+            const max = Math.max(...currentArray);
+            const min = Math.min(...currentArray);
+            const maxIndex = currentArray.indexOf(max);
+            const minIndex = currentArray.indexOf(min);
+            
+            const statsHtml = `
+                <strong>📊 Array Statistics:</strong><br>
+                Size: ${currentArray.length} elements<br>
+                Sum: ${sum}<br>
+                Average: ${average}<br>
+                Maximum: ${max} (at index ${maxIndex})<br>
+                Minimum: ${min} (at index ${minIndex})
+            `;
+            
+            document.getElementById('arrayStats').innerHTML = statsHtml;
+        }
+
+        function generateCode() {
+            const codeHtml = `// Generated C++ code for your array:
+int myArray[${currentArray.length}] = {${currentArray.join(', ')}};
+
+// Print all elements:
+for(int i = 0; i < ${currentArray.length}; i++) {
+    cout << "Element " << i << ": " << myArray[i] << endl;
+}`;
+            
+            document.getElementById('generatedCode').textContent = codeHtml;
+        }
+
+        function generateRandomArray() {
+            const size = parseInt(document.getElementById('arraySize').value);
+            const randomArray = [];
+            for (let i = 0; i < size; i++) {
+                randomArray.push(Math.floor(Math.random() * 100) + 1);
+            }
+            document.getElementById('arrayValues').value = randomArray.join(', ');
+            parseAndDisplayArray();
+        }
+
+        function sortArray() {
+            currentArray.sort((a, b) => a - b);
+            document.getElementById('arrayValues').value = currentArray.join(', ');
+            visualizeArray();
+            updateStats();
+            generateCode();
+        }
+
+        function reverseArray() {
+            currentArray.reverse();
+            document.getElementById('arrayValues').value = currentArray.join(', ');
+            visualizeArray();
+            updateStats();
+            generateCode();
+        }
+
+        function searchArray() {
+            const searchValue = parseInt(document.getElementById('searchValue').value);
+            const index = currentArray.indexOf(searchValue);
+            const resultDiv = document.getElementById('searchResult');
+            
+            if (index !== -1) {
+                resultDiv.innerHTML = `✅ Found ${searchValue} at index ${index}`;
+                resultDiv.style.color = '#28a745';
+            } else {
+                resultDiv.innerHTML = `❌ ${searchValue} not found in array`;
+                resultDiv.style.color = '#dc3545';
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') {
+                changeSlide(-1);
+            } else if (event.key === 'ArrowRight') {
+                changeSlide(1);
+            }
+        });
+    </script>
+</body>
+</html>
