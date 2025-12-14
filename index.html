@@ -268,20 +268,20 @@
 <body>
     <div class="presentation-container">
         <div class="header">
-            <h1>🎯 C++ Arrays Mastery</h1>
-            <p>From Zero to Hero in 45 Minutes</p>
+            <h1>C++ Arrays Mastery</h1>
+            <!-- <p>From Zero to Hero in 45 Minutes</p> -->
         </div>
 
         <!-- Slide 1: Introduction -->
         <div class="slide-container active">
             <div class="slide">
-                <h2>🚀 What Are Arrays?</h2>
+                <h2>What Are Arrays?</h2>
                 
                 <div class="highlight">
                     <strong>Array = A container that holds multiple values of the same type</strong>
                 </div>
                 
-                <h3>🤔 Imagine This Scenario:</h3>
+                <h3>Imagine This Scenario:</h3>
                 <p>You're a teacher with 30 students. You need to store their test scores...</p>
                 
                 <div class="code-example">
@@ -289,19 +289,19 @@
 int student1_score = 85;
 int student2_score = 92;
 int student3_score = 78;
-// ... 27 more variables! 😱
+// ... 27 more variables! 
 
 // With arrays (GOOD way):
-int scores[30] = {85, 92, 78, ...}; // Much better! 🎉
+int scores[30] = {85, 92, 78, ...}; // Much better! 
                 </div>
                 
-                <h3>🏠 Real Life Example:</h3>
+                <h3>Real Life Example:</h3>
                 <p>Think of an array like an apartment building:</p>
                 <ul>
-                    <li>🏢 The building = Array name</li>
-                    <li>🚪 Each apartment = Array element</li>
-                    <li>🔢 Apartment number = Index (starts from 0)</li>
-                    <li>👥 Residents = Data values</li>
+                    <li>The building = Array name</li>
+                    <li>Each apartment = Array element</li>
+                    <li>Apartment number = Index (starts from 0)</li>
+                    <li>Residents = Data values</li>
                 </ul>
             </div>
         </div>
@@ -309,9 +309,9 @@ int scores[30] = {85, 92, 78, ...}; // Much better! 🎉
         <!-- Slide 2: Why Arrays? -->
         <div class="slide-container">
             <div class="slide">
-                <h2>💡 Why Do We Need Arrays?</h2>
+                <h2>Why Do We Need Arrays?</h2>
                 
-                <h3>🎯 Problems Arrays Solve:</h3>
+                <h3>Problems Arrays Solve:</h3>
                 <ul>
                     <li><strong>Organization:</strong> Keep related data together</li>
                     <li><strong>Efficiency:</strong> Process lots of data easily</li>
@@ -319,7 +319,7 @@ int scores[30] = {85, 92, 78, ...}; // Much better! 🎉
                     <li><strong>Loops:</strong> Perfect for repetitive operations</li>
                 </ul>
                 
-                <h3>📊 Without Arrays vs With Arrays:</h3>
+                <h3>Without Arrays vs With Arrays:</h3>
                 <div class="code-example">
 // Finding average of 5 test scores
 
@@ -337,7 +337,7 @@ int average = sum / 5;
                 </div>
                 
                 <div class="highlight">
-                    <strong>💰 Bottom Line:</strong> Arrays make your code shorter, cleaner, and more powerful!
+                    <strong>Bottom Line:</strong> Arrays make your code shorter, cleaner, and more powerful!
                 </div>
             </div>
         </div>
@@ -345,15 +345,15 @@ int average = sum / 5;
         <!-- Slide 3: Array Basics -->
         <div class="slide-container">
             <div class="slide">
-                <h2>📚 Array Basics</h2>
+                <h2>Array Basics</h2>
                 
-                <h3>🏗️ Creating an Array:</h3>
+                <h3>Creating an Array:</h3>
                 <div class="code-example">
 // Syntax: dataType arrayName[size] = {values};
 int numbers[5] = {10, 20, 30, 40, 50};
                 </div>
                 
-                <h3>👁️ Visual Representation:</h3>
+                <h3>Visual Representation:</h3>
                 <div class="visual-array">
                     <div class="array-item">
                         <div class="array-cell">10</div>
@@ -377,7 +377,7 @@ int numbers[5] = {10, 20, 30, 40, 50};
                     </div>
                 </div>
                 
-                <h3>🔑 Key Points:</h3>
+                <h3>Key Points:</h3>
                 <ul>
                     <li><strong>Index starts at 0:</strong> First element is numbers[0]</li>
                     <li><strong>Last index is size-1:</strong> For 5 elements, last is numbers[4]</li>
@@ -398,9 +398,9 @@ numbers[2] = 99;     // Changes 30 to 99
         <!-- Slide 4: Array Operations -->
         <div class="slide-container">
             <div class="slide">
-                <h2>⚡ Common Array Operations</h2>
+                <h2>Common Array Operations</h2>
                 
-                <h3>🔄 1. Looping Through Arrays:</h3>
+                <h3>1. Looping Through Arrays:</h3>
                 <div class="code-example">
 int grades[5] = {85, 92, 78, 96, 88};
 
@@ -410,7 +410,7 @@ for(int i = 0; i < 5; i++) {
 }
                 </div>
                 
-                <h3>🔍 2. Finding Maximum Value:</h3>
+                <h3>2. Finding Maximum Value:</h3>
                 <div class="code-example">
 int max = grades[0];  // Start with first element
 for(int i = 1; i < 5; i++) {
@@ -421,7 +421,7 @@ for(int i = 1; i < 5; i++) {
 cout << "Highest grade: " << max;
                 </div>
                 
-                <h3>📊 3. Calculating Average:</h3>
+                <h3>3. Calculating Average:</h3>
                 <div class="code-example">
 int sum = 0;
 for(int i = 0; i < 5; i++) {
@@ -431,7 +431,7 @@ double average = (double)sum / 5;
 cout << "Average grade: " << average;
                 </div>
                 
-                <h3>🎯 4. Searching for a Value:</h3>
+                <h3>4. Searching for a Value:</h3>
                 <div class="code-example">
 int searchFor = 92;
 bool found = false;
@@ -449,30 +449,30 @@ for(int i = 0; i < 5; i++) {
         <!-- Slide 5: Real World Examples -->
         <div class="slide-container">
             <div class="slide">
-                <h2>🌍 Real World Applications</h2>
+                <h2>Real World Applications</h2>
                 
-                <h3>🎮 1. Game Development:</h3>
+                <h3>1. Game Development:</h3>
                 <ul>
                     <li>Player inventory items</li>
                     <li>High scores leaderboard</li>
                     <li>Game level data</li>
                 </ul>
                 
-                <h3>🏪 2. Business Applications:</h3>
+                <h3>2. Business Applications:</h3>
                 <ul>
                     <li>Sales data for each month</li>
                     <li>Employee salary information</li>
                     <li>Product inventory tracking</li>
                 </ul>
                 
-                <h3>🔬 3. Scientific Computing:</h3>
+                <h3>3. Scientific Computing:</h3>
                 <ul>
                     <li>Temperature readings over time</li>
                     <li>Experimental data collection</li>
                     <li>Mathematical calculations</li>
                 </ul>
                 
-                <h3>📱 4. Mobile Apps:</h3>
+                <h3>4. Mobile Apps:</h3>
                 <ul>
                     <li>Contact lists</li>
                     <li>Photo galleries</li>
@@ -491,7 +491,7 @@ for(int i = 0; i < 7; i++) {
                 </div>
                 
                 <div class="highlight">
-                    <strong>🎯 Key Insight:</strong> Arrays are everywhere in programming! Master them and you'll solve problems more efficiently.
+                    <strong>Key Insight:</strong> Arrays are everywhere in programming! Master them and you'll solve problems more efficiently.
                 </div>
             </div>
         </div>
@@ -499,9 +499,9 @@ for(int i = 0; i < 7; i++) {
         <!-- Slide 6: Common Mistakes -->
         <div class="slide-container">
             <div class="slide">
-                <h2>⚠️ Common Mistakes to Avoid</h2>
+                <h2>Common Mistakes to Avoid</h2>
                 
-                <h3>🚫 1. Index Out of Bounds:</h3>
+                <h3>1. Index Out of Bounds:</h3>
                 <div class="code-example">
 int arr[5] = {1, 2, 3, 4, 5};
 
@@ -512,7 +512,7 @@ cout << arr[5];  // ❌ Dangerous! Undefined behavior
 cout << arr[4];  // ✅ Last valid index
                 </div>
                 
-                <h3>🚫 2. Forgetting Array Starts at 0:</h3>
+                <h3>2. Forgetting Array Starts at 0:</h3>
                 <div class="code-example">
 int scores[3] = {85, 92, 78};
 
@@ -523,7 +523,7 @@ cout << "First score: " << scores[1];  // ❌ This is actually second!
 cout << "First score: " << scores[0];  // ✅ Index 0 is first
                 </div>
                 
-                <h3>🚫 3. Wrong Loop Conditions:</h3>
+                <h3>3. Wrong Loop Conditions:</h3>
                 <div class="code-example">
 int data[5] = {10, 20, 30, 40, 50};
 
@@ -538,7 +538,7 @@ for(int i = 0; i < 5; i++) {   // ✅ Stops at i=4
 }
                 </div>
                 
-                <h3>💡 Pro Tips:</h3>
+                <h3>Pro Tips:</h3>
                 <ul>
                     <li>Always use <strong>i < size</strong> in loops, not <strong>i <= size</strong></li>
                     <li>Remember: for array of size N, valid indices are 0 to N-1</li>
@@ -550,11 +550,11 @@ for(int i = 0; i < 5; i++) {   // ✅ Stops at i=4
         <!-- Slide 7: Interactive Playground -->
         <div class="slide-container">
             <div class="slide">
-                <h2>🎮 Interactive Array Playground</h2>
+                <h2>Interactive Array Playground</h2>
                 <p>Now it's your turn! Experiment with arrays and see how they work in real-time.</p>
                 
                 <div class="playground">
-                    <h4>🔧 Array Builder & Analyzer</h4>
+                    <h4>Array Builder & Analyzer</h4>
                     
                     <div class="input-section">
                         <div class="input-group">
@@ -585,7 +585,7 @@ for(int i = 0; i < 5; i++) {   // ✅ Stops at i=4
                     </div>
                     
                     <div class="playground-result">
-                        <h4>📊 Your Array:</h4>
+                        <h4>Your Array:</h4>
                         <div id="arrayVisualization" class="array-visualization">
                             <!-- Array visualization will appear here -->
                         </div>
@@ -596,7 +596,7 @@ for(int i = 0; i < 5; i++) {   // ✅ Stops at i=4
                             </div>
                         </div>
                         
-                        <h4>🔍 Operations:</h4>
+                        <h4>Operations:</h4>
                         <div style="margin-top: 15px;">
                             <label>Search for value: </label>
                             <input type="number" id="searchValue" placeholder="Enter number">
@@ -604,7 +604,7 @@ for(int i = 0; i < 5; i++) {   // ✅ Stops at i=4
                             <div id="searchResult" style="margin-top: 10px; font-weight: bold;"></div>
                         </div>
                         
-                        <h4>📝 C++ Code:</h4>
+                        <h4>C++ Code:</h4>
                         <div id="generatedCode" class="code-example" style="margin-top: 15px;">
                             <!-- Generated code will appear here -->
                         </div>
@@ -616,9 +616,9 @@ for(int i = 0; i < 5; i++) {   // ✅ Stops at i=4
         <!-- Slide 8: Summary -->
         <div class="slide-container">
             <div class="slide">
-                <h2>🎯 Summary & Next Steps</h2>
+                <h2>Summary & Next Steps</h2>
                 
-                <h3>✅ What You've Learned:</h3>
+                <h3>What You've Learned:</h3>
                 <ul>
                     <li>🏗️ <strong>What arrays are:</strong> Containers for multiple values of the same type</li>
                     <li>🎯 <strong>Why they're important:</strong> Organize data, work with loops, solve real problems</li>
